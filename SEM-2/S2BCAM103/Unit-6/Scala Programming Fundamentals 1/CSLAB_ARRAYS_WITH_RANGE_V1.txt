@@ -1,0 +1,52 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_ARRAYS_WITH_RANGE_V1
+Purpose 	:   Code for Arrays With Range Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/13/2015 16:58 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/13/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  object Test {
+   def main(args: Array[String]) {
+      var myList1 = range(10, 20, 2)
+      var myList2 = range(10,20)
+
+      // Print all the array elements
+      for ( x <- myList1 ) {
+         print( " " + x )
+      }
+      println()
+      for ( x <- myList2 ) {
+         print( " " + x )
+      }
+   }
+
+  }
+  
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

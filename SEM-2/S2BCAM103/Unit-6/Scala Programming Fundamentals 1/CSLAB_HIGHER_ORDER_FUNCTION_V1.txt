@@ -1,0 +1,48 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_HIGHER_ORDER_FUNCTION_V1
+Purpose 	:   Code for Higher Order Functions in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/13/2015 11:41 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/13/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  object Test {
+   def main(args: Array[String]) {
+
+      println( apply( layout, 10) )
+
+   }
+
+   def apply(f: Int => String, v: Int) = f(v)
+
+   def layout[A](x: A) = "[" + x.toString() + "]"
+   
+}
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

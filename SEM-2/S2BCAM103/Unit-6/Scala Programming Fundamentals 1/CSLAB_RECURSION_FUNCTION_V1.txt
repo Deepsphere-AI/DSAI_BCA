@@ -1,0 +1,49 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_RECURSION_FUNCTION_V1
+Purpose 	:   Code for Recursion Function in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/13/2015 11:14 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/13/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  object Test {
+   def main(args: Array[String]) {
+      for (i <- 1 to 10)
+         println( "Factorial of " + i + ": = " + factorial(i) )
+   }
+   
+   def factorial(n: BigInt): BigInt = {  
+      if (n <= 1)
+         1  
+      else    
+      n * factorial(n - 1)
+   }
+}
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

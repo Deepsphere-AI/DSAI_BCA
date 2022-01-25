@@ -1,0 +1,53 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_ACCESS_MODIFIER_PUBLIC_MEMBER_V1
+Purpose 	:   Code for Access Modifier - Public Member in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/12/2015 10:50 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/12/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  class Outer {
+   
+  class Inner {
+      
+  def f() { println("f") }
+      
+  class InnerMost {
+         
+  f() // OK
+      
+  }
+   
+  }
+   
+  (new Inner).f() // OK because now f() is public
+
+  }
+  
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************

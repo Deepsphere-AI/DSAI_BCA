@@ -1,0 +1,50 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_PARTIALLY_APPLIED_FUNCTIONS_V1
+Purpose 	:   Code for Partially Applied Functions in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/13/2015 10:29 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/13/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  object Test {
+   def main(args: Array[String]) {
+      val date = new Date
+      log(date, "message1" )
+      Thread.sleep(1000)
+      log(date, "message2" )
+      Thread.sleep(1000)
+      log(date, "message3" )
+   }
+
+   def log(date: Date, message: String)  = {
+     println(date + "----" + message)
+   }
+}
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

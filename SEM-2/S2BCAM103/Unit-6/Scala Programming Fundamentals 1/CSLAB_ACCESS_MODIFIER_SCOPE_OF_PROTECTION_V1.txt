@@ -1,0 +1,61 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_ACCESS_MODIFIER_SCOPE_OF_PROTECTION_V1
+Purpose 	:   Code for Access Modifier - Scope of Protection in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/12/2015 11:13 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/12/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  package society {
+   
+  package professional {
+      
+  class Executive {
+         
+  private[professional] var workDetails = null
+         
+  private[society] var friends = null
+         
+  private[this] var secrets = null
+
+  def help(another : Executive) {
+            
+  println(another.workDetails)
+            
+  println(another.secrets) //ERROR
+         
+  }
+      
+  }
+   
+  }
+
+  }
+  
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************

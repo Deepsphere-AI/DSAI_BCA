@@ -1,0 +1,53 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_EXTRACTORS_PATTERN_MATCHING_V1
+Purpose 	:   Code for Pattern Matching With Extractors in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/14/2015 17:42 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/14/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+object Test {
+   def main(args: Array[String]) {
+      
+      val x = Test(5)
+      println(x)
+
+      x match
+      {
+         case Test(num) => println(x+" is bigger two times than "+num)
+         //unapply is invoked
+         case _ => println("i cannot calculate")
+      }
+
+   }
+   def apply(x: Int) = x*2
+   def unapply(z: Int): Option[Int] = if (z%2==0) Some(z/2) else None
+}
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
