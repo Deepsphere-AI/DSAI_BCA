@@ -1,0 +1,41 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_SCATTER_PLOT_V1
+Purpose 	:   Code for Scatter Plot in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/20/2015 9:35 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/20/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  import org.sameersingh.scalaplot.Implicits._
+
+  val x = 0.0 until 2.0 * math.Pi by 0.1
+
+  output(PNG("docs/img/", "test"), xyChart(x ->(math.sin(_), math.cos(_))))
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
