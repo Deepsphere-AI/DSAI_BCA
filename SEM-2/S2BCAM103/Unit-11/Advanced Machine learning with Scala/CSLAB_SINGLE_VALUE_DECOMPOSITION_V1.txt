@@ -1,0 +1,51 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_SINGLE_VALUE_DECOMPOSITION_V1
+Purpose 	:   Code for Single Value Decomposition in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/20/2015 14:13 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/20/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  import org.apache.spark.mllib.linalg.Matrix
+
+  import org.apache.spark.mllib.linalg.distributed.RowMatrix
+
+  import org.apache.spark.mllib.linalg.SingularValueDecomposition
+
+  val mat: RowMatrix = ...
+
+  val svd: SingularValueDecomposition[RowMatrix, Matrix] = mat.computeSVD(20, computeU = true)
+
+  val U: RowMatrix = svd.U // The U factor is a RowMatrix.
+
+  val s: Vector = svd.s // The singular values are stored in a local dense vector.
+
+  val V: Matrix = svd.V // The V factor is a local dense matrix.
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
