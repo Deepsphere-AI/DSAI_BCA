@@ -1,0 +1,56 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_IMPORTING_CSV_FILE_IN_SCALA_V1
+Purpose 	:   Code for Reading CSV Files in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/18/2015 10:11 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/18/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  object CSVDemo extends App {
+
+  println("Month, Income, Expenses, Profit")
+  
+  val bufferedSource = io.Source.fromFile("/tmp/finance.csv")
+  
+  for (line <- bufferedSource.getLines) {
+    
+  val cols = line.split(",").map(_.trim)
+    
+  // do whatever you want with the columns here
+    
+  println(s"${cols(0)}|${cols(1)}|${cols(2)}|${cols(3)}")
+  
+  }
+  
+  bufferedSource.close
+
+
+  }
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
