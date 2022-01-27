@@ -1,0 +1,79 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_LOGISTIC_REGRESSION_V1
+Purpose 	:   Code for Logistic Regression in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/19/2015 13:15 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/19	/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  import org.apache.spark.SparkContext
+
+  import org.apache.spark.mllib.classification.{LogisticRegressionWithLBFGS, LogisticRegressionModel}
+
+  import org.apache.spark.mllib.evaluation.MulticlassMetrics
+
+  import org.apache.spark.mllib.regression.LabeledPoint
+
+  import org.apache.spark.mllib.linalg.Vectors
+
+  import org.apache.spark.mllib.util.MLUtils
+
+  val data = MLUtils.loadLibSVMFile(sc, "data/mllib/sample_libsvm_data.txt")
+
+  val splits = data.randomSplit(Array(0.6, 0.4), seed = 11L)
+
+  val training = splits(0).cache()
+
+  val test = splits(1)
+
+  val model = new LogisticRegressionWithLBFGS()
+  
+  .setNumClasses(10)
+
+  .run(training)
+
+  val predictionAndLabels = test.map { case LabeledPoint(label, features) =>
+  
+  val prediction = model.predict(features)
+ 
+  (prediction, label)
+
+  }
+
+  val metrics = new MulticlassMetrics(predictionAndLabels)
+
+  val precision = metrics.precision
+
+  println("Precision = " + precision)
+
+  model.save(sc, "myModelPath")
+
+  val sameModel = LogisticRegressionModel.load(sc, "myModelPath")
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

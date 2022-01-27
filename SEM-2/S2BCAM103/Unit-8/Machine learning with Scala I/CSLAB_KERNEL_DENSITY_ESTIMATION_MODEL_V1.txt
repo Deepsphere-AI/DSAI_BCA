@@ -1,0 +1,49 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_KERNEL_DENSITY_ESTIMATION_MODEL_V1
+Purpose 	:   Code for Kernel Density Estimation Model in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/18/2015 17:38 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/18/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  import org.apache.spark.mllib.stat.KernelDensity
+
+  import org.apache.spark.rdd.RDD
+
+  val data: RDD[Double] = ... // an RDD of sample data
+
+  val kd = new KernelDensity()
+  
+  .setSample(data)
+  
+  .setBandwidth(3.0)
+
+  val densities = kd.estimate(Array(-1.0, 2.0, 5.0))
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
