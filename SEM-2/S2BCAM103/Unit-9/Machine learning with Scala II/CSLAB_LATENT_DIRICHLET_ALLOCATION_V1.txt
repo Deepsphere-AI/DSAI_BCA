@@ -1,0 +1,65 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_LATENT_DIRICHLET_ALLOCATION_V1
+Purpose 	:   Code for Latent Dirichilet Allocation in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/20/2015 18:24 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/20/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  import org.apache.spark.mllib.clustering.{LDA, DistributedLDAModel}
+
+  import org.apache.spark.mllib.linalg.Vectors
+
+  val data = sc.textFile("data/mllib/sample_lda_data.txt")
+
+  val parsedData = data.map(s => Vectors.dense(s.trim.split(' ').map(_.toDouble)))
+
+  val corpus = parsedData.zipWithIndex.map(_.swap).cache()
+
+  val ldaModel = new LDA().setK(3).run(corpus)
+
+  println("Learned topics (as distributions over vocab of " + ldaModel.vocabSize + " words):")
+
+  val topics = ldaModel.topicsMatrix
+
+  for (topic <- Range(0, 3)) {
+  
+  print("Topic " + topic + ":")
+  
+  for (word <- Range(0, ldaModel.vocabSize)) { print(" " + topics(word, topic)); }
+  
+  println()
+
+  }
+
+  ldaModel.save(sc, "myLDAModel")
+
+  val sameModel = DistributedLDAModel.load(sc, "myLDAModel")
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

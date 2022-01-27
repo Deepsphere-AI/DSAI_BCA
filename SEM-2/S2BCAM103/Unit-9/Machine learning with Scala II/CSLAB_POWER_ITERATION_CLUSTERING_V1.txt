@@ -1,0 +1,67 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_POWER_ITERATION_CLUSTERING_V1
+Purpose 	:   Code for Power Iteration in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/20/2015 17:47 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/20/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  import org.apache.spark.mllib.clustering.{PowerIterationClustering, PowerIterationClusteringModel}
+
+  import org.apache.spark.mllib.linalg.Vectors
+
+  val data = sc.textFile("data/mllib/pic_data.txt")
+
+  val similarities = data.map { line =>
+  
+  val parts = line.split(' ')
+  
+  (parts(0).toLong, parts(1).toLong, parts(2).toDouble)
+
+  }
+
+  val pic = new PowerIterationClustering()
+  
+  .setK(2)
+  
+  .setMaxIterations(10)
+
+  val model = pic.run(similarities)
+
+  model.assignments.foreach { a =>
+ 
+  println(s"${a.id} -> ${a.cluster}")
+
+  }
+
+  model.save(sc, "myModelPath")
+
+  val sameModel = PowerIterationClusteringModel.load(sc, "myModelPath")
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
