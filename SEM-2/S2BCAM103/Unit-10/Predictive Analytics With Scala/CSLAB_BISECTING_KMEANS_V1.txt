@@ -1,0 +1,55 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_BISECTING_KMEANS_V1
+Purpose 	:   Code for Bisecting Kmeans in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   01/20/2015 18:55 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/20/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+  import org.apache.spark.mllib.clustering.BisectingKMeans
+
+  import org.apache.spark.mllib.linalg.{Vector, Vectors}
+
+  def parse(line: String): Vector = Vectors.dense(line.split(" ").map(_.toDouble))
+
+  val data = sc.textFile("data/mllib/kmeans_data.txt").map(parse).cache()
+
+  val bkm = new BisectingKMeans().setK(6)
+
+  val model = bkm.run(data)
+
+  println(s"Compute Cost: ${model.computeCost(data)}")
+
+  model.clusterCenters.zipWithIndex.foreach { case (center, idx) =>
+  
+  println(s"Cluster Center ${idx}: ${center}")
+
+  }
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
