@@ -1,0 +1,72 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_COMBINEBYKEY_FUNCTION_V1
+Purpose 	:   A Program for CombineByKey Function in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   13/02/2019 22:03 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				13/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for CombineByKey Function in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+val vAR_CSLAB_inputrdd = sc.parallelize(Seq(("maths", 50), ("maths", 60),("english", 65),("physics", 66), ("physics", 61), ("physics", 87)), 1)
+
+vAR_CSLAB_inputrdd.getNumPartitions
+
+val vAR_CSLAB_reduced = vAR_CSLAB_inputrdd.combineByKey(
+    
+    (vAR_CSLAB_mark) => {
+        
+        println(s"Create combiner -> ${vAR_CSLAB_mark}")
+        
+        (vAR_CSLAB_mark, 1)
+        
+    },
+    
+    (vAR_CSLAB_acc: (Int, Int), v) => {
+        
+        println(s"""Merge value : (${vAR_CSLAB_acc._1} + ${v}, ${vAR_CSLAB_acc._2} + 1)""")
+        
+        (vAR_CSLAB_acc._1 + v, vAR_CSLAB_acc._2 + 1)
+        
+    },
+    
+    (vAR_CSLAB_acc1: (Int, Int), vAR_CSLAB_acc2: (Int, Int)) => {
+        
+        println(s"""Merge Combiner : (${vAR_CSLAB_acc1._1} + ${vAR_CSLAB_acc2._1}, ${vAR_CSLAB_acc1._2} + ${vAR_CSLAB_acc2._2})""")
+        
+        (vAR_CSLAB_acc1._1 + vAR_CSLAB_acc2._1, vAR_CSLAB_acc1._2 + vAR_CSLAB_acc2._2)}
+    
+)
+
+vAR_CSLAB_reduced.collect()
+
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
