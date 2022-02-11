@@ -1,0 +1,83 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_HYPOTHESIS_TESTING_MODEL_V1
+Purpose 	:   A Program for Hypothesis Testing Model in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   06/02/2019 13:02 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				06/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Hypothesis Testing Model in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.mllib.linalg._
+import org.apache.spark.mllib.regression.LabeledPoint
+import org.apache.spark.mllib.stat.Statistics
+import org.apache.spark.mllib.stat.test.ChiSqTestResult
+import org.apache.spark.rdd.RDD
+
+// a vector composed of the frequencies of events
+val vAR_CSLAB_vec: Vector = Vectors.dense(0.1, 0.15, 0.2, 0.3, 0.25)
+
+// compute the goodness of fit. If a second vector to test against is not supplied
+// as a parameter, the test runs against a uniform distribution.
+val vAR_CSLAB_goodnessOfFitTestResult = Statistics.chiSqTest(vAR_CSLAB_vec)
+
+// summary of the test including the p-value, degrees of freedom, test statistic, the method
+// used, and the null hypothesis.
+println(s"$vAR_CSLAB_goodnessOfFitTestResult\n")
+
+// a contingency matrix. Create a dense matrix ((1.0, 2.0), (3.0, 4.0), (5.0, 6.0))
+val vAR_CSLAB_mat: Matrix = Matrices.dense(3, 2, Array(1.0, 3.0, 5.0, 2.0, 4.0, 6.0))
+
+// conduct Pearson's independence test on the input contingency matrix
+val vAR_CSLAB_independenceTestResult = Statistics.chiSqTest(vAR_CSLAB_mat)
+
+// summary of the test including the p-value, degrees of freedom
+println(s"$vAR_CSLAB_independenceTestResult\n")
+
+val vAR_CSLAB_obs: RDD[LabeledPoint] =
+  sc.parallelize(
+    Seq(
+      LabeledPoint(1.0, Vectors.dense(1.0, 0.0, 3.0)),
+      LabeledPoint(1.0, Vectors.dense(1.0, 2.0, 0.0)),
+      LabeledPoint(-1.0, Vectors.dense(-1.0, 0.0, -0.5)
+      )
+    )
+  ) // (feature, label) pairs.
+
+
+val vAR_CSLAB_featureTestResults: Array[ChiSqTestResult] = Statistics.chiSqTest(vAR_CSLAB_obs)
+vAR_CSLAB_featureTestResults.zipWithIndex.foreach { case (k, v) =>
+  println("Column " + (v + 1).toString + ":")
+  println(k)
+}  // summary of the test
+
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

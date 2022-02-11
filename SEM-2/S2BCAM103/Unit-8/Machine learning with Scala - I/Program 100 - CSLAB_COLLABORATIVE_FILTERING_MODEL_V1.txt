@@ -1,0 +1,97 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_COLLABORATIVE_FILTERING_MODEL_V1
+Purpose 	:   A Program for Collaborative Filtering Model in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   07/02/2109 9:42 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				06/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Collaborative Filtering Model in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.mllib.recommendation.ALS
+import org.apache.spark.mllib.recommendation.MatrixFactorizationModel
+import org.apache.spark.mllib.recommendation.Rating
+
+var vAR_CSLAB_ENV_PATH = sys.env("SCALA_TUTORIAL_PATH2")
+       
+var vAR_CSLAB_DATA_FILE =  "/als/test.data";
+      
+var vAR_CSLAB_FILE_PATH =  vAR_CSLAB_ENV_PATH + vAR_CSLAB_DATA_FILE
+
+// Load and parse the data
+val vAR_CSLAB_data = sc.textFile(vAR_CSLAB_FILE_PATH)
+
+val vAR_CSLAB_ratings = vAR_CSLAB_data.map(_.split(',') match { case Array(user, item, rate) =>
+    Rating(user.toInt, item.toInt, rate.toDouble)
+  })
+
+// Build the recommendation model using ALS
+val vAR_CSLAB_rank = 10
+
+val vAR_CSLAB_numIterations = 10
+
+val vAR_CSLAB_model = ALS.train(vAR_CSLAB_ratings, vAR_CSLAB_rank, vAR_CSLAB_numIterations, 0.01)
+
+// Evaluate the model on rating data
+val vAR_CSLAB_usersProducts = vAR_CSLAB_ratings.map { case Rating(user, product, rate) =>
+  (user, product)
+}
+
+val vAR_CSLAB_predictions = 
+  vAR_CSLAB_model.predict(vAR_CSLAB_usersProducts).map { case Rating(user, product, rate) => 
+    ((user, product), rate)
+  }
+
+val vAR_CSLAB_ratesAndPreds = vAR_CSLAB_ratings.map { case Rating(user, product, rate) => 
+  ((user, product), rate)
+}.join(vAR_CSLAB_predictions)
+
+val vAR_CSLAB_MSE = vAR_CSLAB_ratesAndPreds.map { case ((user, product), (r1, r2)) => 
+  val vAR_CSLAB_err = (r1 - r2)
+  vAR_CSLAB_err * vAR_CSLAB_err
+}.mean()
+
+println("Mean Squared Error = " + vAR_CSLAB_MSE)
+
+// Save and load model
+vAR_CSLAB_model.save(sc, "myModelPath7")
+
+val vAR_CSLAB_sameModel = MatrixFactorizationModel.load(sc, "myModelPath7")
+
+//If the rating matrix is derived from another source of information (e.g., it is inferred from other signals), you can use the trainImplicit method to get better results.
+
+val vAR_CSLAB_alpha = 0.01
+
+val vAR_CSLAB_lambda = 0.01
+
+val vAR_CSLAB_model1 = ALS.trainImplicit(vAR_CSLAB_ratings, vAR_CSLAB_rank, vAR_CSLAB_numIterations, vAR_CSLAB_lambda, vAR_CSLAB_alpha)
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

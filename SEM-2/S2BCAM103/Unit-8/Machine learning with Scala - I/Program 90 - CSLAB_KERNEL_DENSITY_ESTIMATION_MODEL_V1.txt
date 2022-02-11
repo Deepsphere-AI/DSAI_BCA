@@ -1,0 +1,54 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_KERNEL_DENSITY_ESTIMATION_MODEL_V1
+Purpose 	:   A Program for Kernel Density Estimation Model Model in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   06/02/2019 13:59 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				06/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Kernel Density Estimation Model Model in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.mllib.stat.KernelDensity
+import org.apache.spark.rdd.RDD
+
+// an RDD of sample data
+val vAR_CSLAB_data: RDD[Double] = sc.parallelize(Seq(1, 1, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 9))
+
+// Construct the density estimator with the sample data and a standard deviation
+// for the Gaussian kernels
+val vAR_CSLAB_kd = new KernelDensity()
+  .setSample(vAR_CSLAB_data)
+  .setBandwidth(3.0)
+
+// Find density estimates for the given values
+val vAR_CSLAB_densities = vAR_CSLAB_kd.estimate(Array(-1.0, 2.0, 5.0))
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
