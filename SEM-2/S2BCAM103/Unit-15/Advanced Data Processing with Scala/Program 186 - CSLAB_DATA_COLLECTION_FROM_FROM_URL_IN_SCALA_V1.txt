@@ -1,0 +1,47 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_DATA_COLLECTION_FROM_FROM_URL_IN_SCALA_V1
+Purpose 	:   A Program for Data Collection from an URL in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   06/02/2019 10:49 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				06/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Data Collection from an URL in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import scala.io.Source
+
+val vAR_CSLAB_holmesUrl = "http://www.gutenberg.org/cache/epub/1661/pg1661.txt"
+
+for (line <- Source.fromURL(vAR_CSLAB_holmesUrl).getLines)
+
+println(line)
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
