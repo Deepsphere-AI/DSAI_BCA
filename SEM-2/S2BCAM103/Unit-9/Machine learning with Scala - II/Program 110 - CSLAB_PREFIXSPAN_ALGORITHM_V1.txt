@@ -1,0 +1,59 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_PREFIXSPAN_ALGORITHM_V1
+Purpose 	:   A Program for PrefixSpan Algorithm in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   07/02/2019 14:54 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				07/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for PrefixSpan Algorithm in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.mllib.fpm.PrefixSpan
+
+val vAR_CSLAB_sequences = sc.parallelize(Seq(
+    Array(Array(1, 2), Array(3)),
+    Array(Array(1), Array(3, 2), Array(1, 2)),
+    Array(Array(1, 2), Array(5)),
+    Array(Array(6))
+  ), 2).cache()
+
+val vAR_CSLAB_prefixSpan = new PrefixSpan()
+  .setMinSupport(0.5)
+  .setMaxPatternLength(5)
+
+val vAR_CSLAB_model = vAR_CSLAB_prefixSpan.run(vAR_CSLAB_sequences)
+
+vAR_CSLAB_model.freqSequences.collect().foreach { vAR_CSLAB_freqSequence =>
+println(    
+  vAR_CSLAB_freqSequence.sequence.map(_.mkString("[", ", ", "]")).mkString("[", ", ", "]") + ", " + vAR_CSLAB_freqSequence.freq)    
+}
+	 
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
