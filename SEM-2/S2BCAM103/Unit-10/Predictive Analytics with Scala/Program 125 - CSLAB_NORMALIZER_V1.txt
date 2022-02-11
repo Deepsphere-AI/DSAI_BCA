@@ -1,0 +1,83 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_NORMALIZER_V1
+Purpose 	:   A Program for Normalizers in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   08/02/2019 13:47 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				08/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Normalizers in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+import org.apache.spark.mllib.feature.Normalizer
+import org.apache.spark.mllib.util.MLUtils
+
+object NormalizerExample {
+
+  def main(args: Array[String]): Unit = {
+
+    val vAR_CSLAB_conf = new SparkConf().setAppName("NormalizerExample")
+
+    var vAR_CSLAB_ENV_PATH = sys.env("SCALA_TUTORIAL_PATH2")
+       
+    var vAR_CSLAB_DATA_FILE =  "sample_libsvm_data.txt";
+      
+    var vAR_CSLAB_FILE_PATH =  vAR_CSLAB_ENV_PATH + vAR_CSLAB_DATA_FILE    
+      
+    // $example on$
+    val vAR_CSLAB_data = MLUtils.loadLibSVMFile(sc,vAR_CSLAB_FILE_PATH)
+
+    val vAR_CSLAB_normalizer1 = new Normalizer()
+      
+    val vAR_CSLAB_normalizer2 = new Normalizer(p = Double.PositiveInfinity)
+
+    // Each sample in data1 will be normalized using $L^2$ norm.
+    val vAR_CSLAB_data1 = vAR_CSLAB_data.map(vAR_CSLAB_x => (vAR_CSLAB_x.label, vAR_CSLAB_normalizer1.transform(vAR_CSLAB_x.features)))
+
+    // Each sample in data2 will be normalized using $L^\infty$ norm.
+    val vAR_CSLAB_data2 = vAR_CSLAB_data.map(vAR_CSLAB_x => (vAR_CSLAB_x.label, vAR_CSLAB_normalizer2.transform(vAR_CSLAB_x.features)))
+
+    println("vAR_CSLAB_data1: ")
+      
+    vAR_CSLAB_data1.foreach(vAR_CSLAB_x => println(vAR_CSLAB_x))
+
+    println("vAR_CSLAB_data2: ")
+      
+    vAR_CSLAB_data2.foreach(vAR_CSLAB_x => println(vAR_CSLAB_x))
+
+  }
+    
+}
+
+NormalizerExample.main(Array(" "))
+	 
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
