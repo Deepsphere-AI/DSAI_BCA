@@ -1,0 +1,96 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_ISOTONIC_REGRESSION_V1
+Purpose 	:   A Program for Isotonic Regression in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   08/02/2019 12:16 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				08/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Isotonic Regression in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.mllib.regression.{IsotonicRegression, IsotonicRegressionModel}
+import org.apache.spark.mllib.util.MLUtils
+
+object IsotonicRegressionExample {
+
+  def main(args: Array[String]): Unit = {
+
+    val vAR_CSLAB_conf = new SparkConf().setAppName("IsotonicRegressionExample")
+      
+    var vAR_CSLAB_ENV_PATH = sys.env("SCALA_TUTORIAL_PATH2")
+       
+    var vAR_CSLAB_DATA_FILE =  "sample_isotonic_regression_libsvm_data.txt";
+      
+    var vAR_CSLAB_FILE_PATH =  vAR_CSLAB_ENV_PATH + vAR_CSLAB_DATA_FILE         
+      
+    val vAR_CSLAB_data = MLUtils.loadLibSVMFile(sc,vAR_CSLAB_FILE_PATH).cache()
+
+    // Create label, feature, weight tuples from input data with weight set to default value 1.0.
+    val vAR_CSLAB_parsedData = vAR_CSLAB_data.map { vAR_CSLAB_labeledPoint =>
+      (vAR_CSLAB_labeledPoint.label, vAR_CSLAB_labeledPoint.features(0), 1.0)
+    }
+
+    // Split data into training (60%) and test (40%) sets.
+    val vAR_CSLAB_splits = vAR_CSLAB_parsedData.randomSplit(Array(0.6, 0.4), seed = 11L)
+      
+    val vAR_CSLAB_training = vAR_CSLAB_splits(0)
+      
+    val vAR_CSLAB_test = vAR_CSLAB_splits(1)
+
+    // Create isotonic regression model from training data.
+    // Isotonic parameter defaults to true so it is only shown for demonstration
+    val vAR_CSLAB_model = new IsotonicRegression().setIsotonic(true).run(vAR_CSLAB_training)
+
+    // Create tuples of predicted and real labels.
+    val vAR_CSLAB_predictionAndLabel = vAR_CSLAB_test.map { vAR_CSLAB_point =>
+      val vAR_CSLAB_predictedLabel = vAR_CSLAB_model.predict(vAR_CSLAB_point._2)
+      (vAR_CSLAB_predictedLabel, vAR_CSLAB_point._1)
+    }
+
+    // Calculate mean squared error between predicted and real labels.
+    val vAR_CSLAB_meanSquaredError = vAR_CSLAB_predictionAndLabel.map { case (p, l) => math.pow((p - l), 2) }.mean()
+      
+    println(s"Mean Squared Error = $vAR_CSLAB_meanSquaredError")
+
+    // Save and load model
+      
+    vAR_CSLAB_model.save(sc, "myIsotonicRegressionModel")
+      
+    val vAR_CSLAB_sameModel = IsotonicRegressionModel.load(sc, "myIsotonicRegressionModel")
+      
+  }
+    
+}
+
+IsotonicRegressionExample.main(Array(" "))
+	 
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
