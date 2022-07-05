@@ -1,0 +1,69 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_TAILSKINNY_PCA_V1
+Purpose 	:   A Program for Tail Skinny PCA in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   11/02/2019 14:23 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				11/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Tail Skinny PCA in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.linalg.distributed.RowMatrix
+
+object TallSkinnyPCA {
+    
+  def main(args: Array[String]) {
+    if (args.length != 1) {
+      System.err.println("Usage: TallSkinnyPCA <input>")
+      System.exit(1)
+    }
+
+    val vAR_CSLAB_conf = new SparkConf().setAppName("TallSkinnyPCA")
+
+    // Load and parse the data file.
+    val vAR_CSLAB_rows = sc.textFile(args(0)).map { vAR_CSLAB_line =>
+      val vAR_CSLAB_values = vAR_CSLAB_line.split(' ').map(_.toDouble)
+      Vectors.dense(vAR_CSLAB_values)
+    }
+    val vAR_CSLAB_mat = new RowMatrix(vAR_CSLAB_rows)
+
+    // Compute principal components.
+    val vAR_CSLAB_pc = vAR_CSLAB_mat.computePrincipalComponents(vAR_CSLAB_mat.numCols().toInt)
+
+    println(s"Principal components are:\n $vAR_CSLAB_pc")
+      
+  }
+    
+}
+	 
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
