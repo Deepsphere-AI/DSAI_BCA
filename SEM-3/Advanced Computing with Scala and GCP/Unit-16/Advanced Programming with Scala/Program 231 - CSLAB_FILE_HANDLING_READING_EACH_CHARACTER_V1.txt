@@ -1,0 +1,63 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_FILE_HANDLING_READING_EACH_CHARACTER_V1
+Purpose 	:   A Program for Reading Each Character from a File in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   13/02/2019 20:05 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				13/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Reading Each Character from a File in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import scala.io.Source  
+  
+object MainObject{  
+    
+  def main(args:Array[String]){  
+      
+    val vAR_CSLAB_filename = "C:/DeepSphere.AI/Scala Tutorial/Data/ScalaFile.txt"  
+      
+    val vAR_CSLAB_fileSource = Source.fromFile(vAR_CSLAB_filename)  
+      
+    while(vAR_CSLAB_fileSource.hasNext){  
+        
+      println(vAR_CSLAB_fileSource.next)  
+        
+    }  
+      
+    vAR_CSLAB_fileSource.close()  
+      
+  }  
+    
+}  
+
+MainObject.main(Array(""))
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

@@ -1,0 +1,56 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_STRING_METHODS_CONCAT_V1
+Purpose 	:   A Program for String Concat Method in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   13/02/2019 14:25 hrs
+Version		:   1.0	b
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				13/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for String Concat Method in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+class StringExample{  
+    var vAR_CSLAB_s1 = "This is "  
+    var vAR_CSLAB_s2 = "Scala string example"  
+    def show(){  
+        println(vAR_CSLAB_s1.concat(vAR_CSLAB_s2))  
+    }  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        var vAR_CSLAB_s = new StringExample()  
+        vAR_CSLAB_s.show()  
+    }  
+}  
+
+MainObject.main(Array(""))
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
