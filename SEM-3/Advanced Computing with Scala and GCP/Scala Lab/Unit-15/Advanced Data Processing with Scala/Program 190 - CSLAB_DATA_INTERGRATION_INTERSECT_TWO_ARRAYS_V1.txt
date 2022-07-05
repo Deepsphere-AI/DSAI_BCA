@@ -1,0 +1,45 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_DATA_INTERGRATION_INTERSECT_TWO_ARRAYS_V1
+Purpose 	:   A Program for Intersecting Two Arrays in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   13/02/2019 10:44 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				13/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Intersecting Two Arrays in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+val vAR_CSLAB_a = Array(1,2,3,4,5)
+
+val vAR_CSLAB_b = Array(4,5,6,7,8)
+
+val vAR_CSLAB_c = vAR_CSLAB_a.intersect(vAR_CSLAB_b)
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
