@@ -1,0 +1,94 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_CLASSIFICATION_USING_RANDOM_FOREST_MODEL_V1
+Purpose 	:   A Program for Classification Using Random Forest Model in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   06/02/2109 18:07 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				06/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Classification Using Random Forest Model in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.mllib.tree.RandomForest
+import org.apache.spark.mllib.tree.model.RandomForestModel
+import org.apache.spark.mllib.util.MLUtils
+
+var vAR_CSLAB_ENV_PATH = sys.env("SCALA_TUTORIAL_PATH2")
+       
+var vAR_CSLAB_DATA_FILE =  "sample_libsvm_data.txt";
+      
+var vAR_CSLAB_FILE_PATH =  vAR_CSLAB_ENV_PATH + vAR_CSLAB_DATA_FILE
+
+// Load and parse the data file.
+val vAR_CSLAB_data = MLUtils.loadLibSVMFile(sc, vAR_CSLAB_FILE_PATH)
+
+// Split the data into training and test sets (30% held out for testing)
+val vAR_CSLAB_splits = vAR_CSLAB_data.randomSplit(Array(0.7, 0.3))
+
+val (vAR_CSLAB_trainingData, vAR_CSLAB_testData) = (vAR_CSLAB_splits(0), vAR_CSLAB_splits(1))
+
+// Train a RandomForest model.
+//  Empty categoricalFeaturesInfo indicates all features are continuous.
+val vAR_CSLAB_numClasses = 2
+
+val vAR_CSLAB_categoricalFeaturesInfo = Map[Int, Int]()
+
+val vAR_CSLAB_numTrees = 3 // Use more in practice.
+
+val vAR_CSLAB_featureSubsetStrategy = "auto" // Let the algorithm choose.
+
+val vAR_CSLAB_impurity = "variance"
+
+val vAR_CSLAB_maxDepth = 4
+
+val vAR_CSLAB_maxBins = 32
+
+val vAR_CSLAB_model = RandomForest.trainRegressor(vAR_CSLAB_trainingData, vAR_CSLAB_categoricalFeaturesInfo,
+  vAR_CSLAB_numTrees, vAR_CSLAB_featureSubsetStrategy, vAR_CSLAB_impurity, vAR_CSLAB_maxDepth, vAR_CSLAB_maxBins)
+
+// Evaluate model on test instances and compute test error
+val vAR_CSLAB_labelsAndPredictions = vAR_CSLAB_testData.map { vAR_CSLAB_point =>
+  val vAR_CSLAB_prediction = vAR_CSLAB_model.predict(vAR_CSLAB_point.features)
+  (vAR_CSLAB_point.label, vAR_CSLAB_prediction)
+}
+
+val vAR_CSLAB_testMSE = vAR_CSLAB_labelsAndPredictions.map{ case(v, p) => math.pow((v - p), 2)}.mean()
+
+println("Test Mean Squared Error = " + vAR_CSLAB_testMSE)
+
+println("Learned regression forest model:\n" + vAR_CSLAB_model.toDebugString)
+
+// Save and load model
+vAR_CSLAB_model.save(sc, "myModelPath3")
+
+val vAR_CSLAB_sameModel = RandomForestModel.load(sc, "myModelPath3")
+
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
