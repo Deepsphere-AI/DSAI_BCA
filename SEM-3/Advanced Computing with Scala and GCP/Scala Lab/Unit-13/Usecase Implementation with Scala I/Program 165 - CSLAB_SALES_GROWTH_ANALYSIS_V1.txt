@@ -1,0 +1,80 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_SALES_GROWTH_ANALYSIS_V1
+Purpose 	:   A Program for Product Sales Analysis by Product in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   12/02/2019 14:12 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				12/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Product Sales Analysis by Product in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.regression.LabeledPoint
+import org.apache.spark.mllib.regression.LinearRegressionModel
+import org.apache.spark.mllib.regression.LinearRegressionWithSGD
+
+var vAR_CSLAB_ENV_PATH = sys.env("SCALA_TUTORIAL_PATH2")
+       
+var vAR_CSLAB_DATA_FILE =  "ridge-data/lpsa.data";
+      
+var vAR_CSLAB_FILE_PATH =  vAR_CSLAB_ENV_PATH + vAR_CSLAB_DATA_FILE  
+
+// Load and parse the data
+val vAR_CSLAB_data = sc.textFile(vAR_CSLAB_FILE_PATH)
+
+val vAR_CSLAB_parsedData = vAR_CSLAB_data.map { line =>
+  val vAR_CSLAB_parts = line.split(',')
+  LabeledPoint(vAR_CSLAB_parts(0).toDouble, Vectors.dense(vAR_CSLAB_parts(1).split(' ').map(_.toDouble)))
+}.cache()
+
+// Building the model
+val vAR_CSLAB_numIterations = 100
+
+val vAR_CSLAB_stepSize = 0.00000001
+
+val vAR_CSLAB_model = LinearRegressionWithSGD.train(vAR_CSLAB_parsedData, vAR_CSLAB_numIterations, vAR_CSLAB_stepSize)
+
+// Evaluate model on training examples and compute training error
+val vAR_CSLAB_valuesAndPreds = vAR_CSLAB_parsedData.map { vAR_CSLAB_point =>
+  val vAR_CSLAB_prediction = vAR_CSLAB_model.predict(vAR_CSLAB_point.features)
+  (vAR_CSLAB_point.label, vAR_CSLAB_prediction)
+}
+
+val vAR_CSLAB_MSE = vAR_CSLAB_valuesAndPreds.map{ case(v, p) => math.pow((v - p), 2) }.mean()
+
+println("training Mean Squared Error = " + vAR_CSLAB_MSE)
+
+// Save and load model
+vAR_CSLAB_model.save(sc, "ProductSalesGrowth")
+
+val vAR_CSLAB_sameModel = LinearRegressionModel.load(sc, "ProductSalesGrowth")
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
