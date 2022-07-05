@@ -1,0 +1,65 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_RANDOM_DATA_GENERATION_MODEL_V1
+Purpose 	:   A Program for Random Number Generation Model in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   06/02/2019 13:34 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				06/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Random Number Generation Model in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+val vAR_CSLAB_r = scala.util.Random
+
+vAR_CSLAB_r.nextInt
+
+vAR_CSLAB_r.nextInt(100)
+
+vAR_CSLAB_r.nextFloat
+
+vAR_CSLAB_r.nextDouble
+
+val vAR_CSLAB_r1 = new scala.util.Random(100)
+
+// random characters
+vAR_CSLAB_r1.nextPrintableChar
+
+vAR_CSLAB_r1.nextPrintableChar
+
+for (i <- 0 to vAR_CSLAB_r1.nextInt(10)) yield vAR_CSLAB_r1.nextPrintableChar
+
+// create a random length range
+var vAR_CSLAB_range = 0 to vAR_CSLAB_r1.nextInt(10)
+
+vAR_CSLAB_range = 0 to vAR_CSLAB_r1.nextInt(10)
+
+for (i <- 0 to vAR_CSLAB_r1.nextInt(10)) yield i * 2
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

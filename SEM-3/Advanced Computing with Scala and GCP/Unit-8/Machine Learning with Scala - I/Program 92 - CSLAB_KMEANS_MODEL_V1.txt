@@ -1,0 +1,75 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_KMEANS_MODEL_V1
+Purpose 	:   A Program for K-Means Clustering Model in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   06/02/2109 14:56 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				01/18/2015		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for K-Means Clustering Model in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.mllib.clustering.{KMeans, KMeansModel}
+
+import org.apache.spark.mllib.linalg.Vectors
+
+var vAR_CSLAB_ENV_PATH = sys.env("SCALA_TUTORIAL_PATH2")
+       
+var vAR_CSLAB_DATA_FILE =  "kmeans_data.txt";
+      
+var vAR_CSLAB_FILE_PATH =  vAR_CSLAB_ENV_PATH + vAR_CSLAB_DATA_FILE
+
+// Load and parse the data
+
+val vAR_CSLAB_data = sc.textFile(vAR_CSLAB_FILE_PATH)
+
+val vAR_CSLAB_parsedData = vAR_CSLAB_data.map(s => Vectors.dense(s.split(' ').map(_.toDouble))).cache()
+
+// Cluster the data into two classes using KMeans
+
+val vAR_CSLAB_numClusters = 2
+
+val vAR_CSLAB_numIterations = 20
+
+val vAR_CSLAB_clusters = KMeans.train(vAR_CSLAB_parsedData, vAR_CSLAB_numClusters, vAR_CSLAB_numIterations)
+
+// Evaluate clustering by computing Within Set Sum of Squared Errors
+
+val vAR_CSLAB_WSSSE = vAR_CSLAB_clusters.computeCost(vAR_CSLAB_parsedData)
+
+println("Within Set Sum of Squared Errors = " + vAR_CSLAB_WSSSE)
+
+// Save and load model
+
+vAR_CSLAB_clusters.save(sc, "myModelPath")
+
+val vAR_CSLAB_sameModel = KMeansModel.load(sc, "myModelPath")
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
