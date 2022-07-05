@@ -1,0 +1,57 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_COLLECTIONS_UNIFORM_LISTS_V1
+Purpose 	:   A Program for Uniform Lists in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   31/01/2019 11:34 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				31/01/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Uniform Lists in Collections in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+object Demo {
+    
+   def UNIFORM_LISTS (args: Array[String]) {
+       
+      val vAR_CSLAB_fruit = List.fill(3)("apples") // Repeats apples three times.
+       
+      println( "vAR_CSLAB_fruit : " + vAR_CSLAB_fruit  )
+
+      val vAR_CSLAB_num = List.fill(10)(2)         // Repeats 2, 10 times.
+       
+      println( "num : " + vAR_CSLAB_num  )
+       
+   }
+    
+}
+
+Demo.UNIFORM_LISTS(Array(" "))
+  
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
