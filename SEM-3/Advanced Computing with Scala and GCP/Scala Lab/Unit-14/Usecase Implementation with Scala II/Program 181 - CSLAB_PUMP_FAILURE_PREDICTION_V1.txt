@@ -1,0 +1,87 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_PUMP_FAILURE_PREDICTION_V1
+Purpose 	:   A Program for Pump Failure Predicion in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   12/02/2019 22:00 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				12/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Pump Failure Predicion in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.mllib.classification.{LogisticRegressionModel, LogisticRegressionWithLBFGS}
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
+import org.apache.spark.mllib.regression.LabeledPoint
+import org.apache.spark.mllib.util.MLUtils
+
+var vAR_CSLAB_ENV_PATH = sys.env("SCALA_TUTORIAL_PATH2")
+       
+var vAR_CSLAB_DATA_FILE =  "sample_libsvm_data.txt";
+      
+var vAR_CSLAB_FILE_PATH =  vAR_CSLAB_ENV_PATH + vAR_CSLAB_DATA_FILE 
+
+val vAR_CSLAB_conf = new SparkConf().setAppName("PumpFailure")
+
+//val sc = new SparkContext(vAR_CSLAB_conf)
+
+// Load training data in LIBSVM format.
+val vAR_CSLAB_data = MLUtils.loadLibSVMFile(sc, vAR_CSLAB_FILE_PATH)
+
+// Split data into training (60%) and test (40%).
+val vAR_CSLAB_splits = vAR_CSLAB_data.randomSplit(Array(0.6, 0.4), seed = 11L)
+
+val vAR_CSLAB_training = vAR_CSLAB_splits(0).cache()
+
+val vAR_CSLAB_test = vAR_CSLAB_splits(1)
+
+// Run training algorithm to build the model
+val vAR_CSLAB_model = new LogisticRegressionWithLBFGS().setNumClasses(10).run(vAR_CSLAB_training)
+
+// Compute raw scores on the test set.
+val vAR_CSLAB_predictionAndLabels = vAR_CSLAB_test.map { case LabeledPoint(label, features) => 
+    val vAR_CSLAB_prediction = vAR_CSLAB_model.predict(features)
+    (vAR_CSLAB_prediction, label)
+}
+
+// Get evaluation metrics.
+val vAR_CSLAB_metrics = new MulticlassMetrics(vAR_CSLAB_predictionAndLabels)
+
+val vAR_CSLAB_accuracy = vAR_CSLAB_metrics.accuracy
+println(s"Accuracy = $vAR_CSLAB_accuracy")
+
+// Save and load model
+vAR_CSLAB_model.save(sc, "PumpFailure")
+
+val vAR_CSLAB_sameModel = LogisticRegressionModel.load(sc,"PumpFailure")
+
+//sc.stop()
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
