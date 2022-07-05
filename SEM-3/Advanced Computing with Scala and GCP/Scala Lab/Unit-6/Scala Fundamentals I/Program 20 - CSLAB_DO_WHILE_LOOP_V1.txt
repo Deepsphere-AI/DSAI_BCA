@@ -1,0 +1,63 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_DO_WHILE_LOOP_V1
+Purpose 	:   A Program for Do While Loop in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   30/01/2019 12:28 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				30/01/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Do While Loop in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+object DO_WHILE_LOOP {
+    
+   def main(args: Array[String]) {
+       
+      // Local variable declaration:
+      var vAR_CSLAB_a = 10;
+       
+      // do loop execution
+       
+      do {
+          
+         println( "Value of vAR_CSLAB_a: " + vAR_CSLAB_a );
+          
+         vAR_CSLAB_a = vAR_CSLAB_a + 1;
+          
+      }
+       
+      while( vAR_CSLAB_a < 20 )
+       
+   }
+    
+}
+
+DO_WHILE_LOOP.main(Array(" "))
+
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************

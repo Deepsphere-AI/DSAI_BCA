@@ -1,0 +1,53 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_SWAP_ELEMENTS_OF_A_TUPLE_V1
+Purpose 	:   A Program for Swapping Elements of a Tuple in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   31/01/2019 15:23 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				31/01/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Converting Tuple to String in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+object Demo {
+    
+   def SWAP_ELEMENTS_OF_A_TUPLE (args: Array[String]) {
+       
+      val vAR_CSLAB_t = new Tuple2("Scala", "hello")
+      
+      println("Swapped Tuple: " + vAR_CSLAB_t.swap )
+       
+   }
+    
+}
+
+Demo.SWAP_ELEMENTS_OF_A_TUPLE (Array(" "))
+  
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
