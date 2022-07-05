@@ -1,0 +1,87 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_STANDARD_SCALAR_V1
+Purpose 	:   A Program for Standard Scalar in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   11/02/2019 09:41 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				11/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Standard Scalar in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+import org.apache.spark.mllib.feature.{StandardScaler, StandardScalerModel}
+import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.util.MLUtils
+
+object StandardScalerExample {
+
+  def main(args: Array[String]): Unit = {
+
+    val vAR_CSLAB_conf = new SparkConf().setAppName("StandardScalerExample")
+      
+    var vAR_CSLAB_ENV_PATH = sys.env("SCALA_TUTORIAL_PATH2")
+       
+    var vAR_CSLAB_DATA_FILE =  "sample_libsvm_data.txt";
+      
+    var vAR_CSLAB_FILE_PATH =  vAR_CSLAB_ENV_PATH + vAR_CSLAB_DATA_FILE      
+    
+    val vAR_CSLAB_data = MLUtils.loadLibSVMFile(sc, vAR_CSLAB_FILE_PATH)
+
+    val vAR_CSLAB_scaler1 = new StandardScaler().fit(vAR_CSLAB_data.map(vAR_CSLAB_x => vAR_CSLAB_x.features))
+      
+    val vAR_CSLAB_scaler2 = new StandardScaler(withMean = true, withStd = true).fit(vAR_CSLAB_data.map(vAR_CSLAB_x => vAR_CSLAB_x.features)
+                                                                                   )
+    // scaler3 is an identical model to scaler2, and will produce identical transformations
+    val vAR_CSLAB_scaler3 = new StandardScalerModel(vAR_CSLAB_scaler2.std, vAR_CSLAB_scaler2.mean)
+
+    // data1 will be unit variance.
+    val vAR_CSLAB_data1 = vAR_CSLAB_data.map(vAR_CSLAB_x => (vAR_CSLAB_x.label, vAR_CSLAB_scaler1.transform(vAR_CSLAB_x.features)))
+
+    // data2 will be unit variance and zero mean.
+    val vAR_CSLAB_data2 = vAR_CSLAB_data.map(vAR_CSLAB_x => (vAR_CSLAB_x.label, vAR_CSLAB_scaler2.transform(Vectors.dense(vAR_CSLAB_x.features.toArray))))
+    // $example off$
+
+    println("vAR_CSLAB_data1: ")
+      
+    vAR_CSLAB_data1.foreach(vAR_CSLAB_x => println(vAR_CSLAB_x))
+
+    println("vAR_CSLAB_data2: ")
+      
+    vAR_CSLAB_data2.foreach(vAR_CSLAB_x => println(vAR_CSLAB_x))
+      
+  }
+    
+}
+
+StandardScalerExample.main(Array(""))
+	 
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

@@ -1,0 +1,82 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_STREAMING_LINEAR_REGRESSION_V1
+Purpose 	:   A Program for Streaming Linear Regression in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   11/02/2019 11:23 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				11/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Streaming Linear Regression in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.SparkConf
+import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.regression.LabeledPoint
+import org.apache.spark.mllib.regression.StreamingLinearRegressionWithSGD
+import org.apache.spark.streaming._
+
+object StreamingLinearRegressionExample {
+
+  def main(args: Array[String]): Unit = {
+    if (args.length != 2) {
+      System.err.println("Usage: StreamingLinearRegressionExample <trainingDir> <testDir>")
+      System.exit(1)
+    }
+
+    val vAR_CSLAB_conf = new SparkConf().setAppName("StreamingLinearRegressionExample")
+      
+    val ssc = new StreamingContext(vAR_CSLAB_conf, Seconds(1))
+
+    val vAR_CSLAB_trainingData = ssc.textFileStream(args(0)).map(LabeledPoint.parse).cache()
+      
+    val vAR_CSLAB_testData = ssc.textFileStream(args(1)).map(LabeledPoint.parse)
+
+    val vAR_CSLAB_numFeatures = 3
+      
+    val vAR_CSLAB_model = new StreamingLinearRegressionWithSGD()
+      .setInitialWeights(Vectors.zeros(vAR_CSLAB_numFeatures))
+
+    vAR_CSLAB_model.trainOn(vAR_CSLAB_trainingData)
+      
+    vAR_CSLAB_model.predictOnValues(vAR_CSLAB_testData.map(vAR_CSLAB_lp => (vAR_CSLAB_lp.label, vAR_CSLAB_lp.features))).print()
+
+    ssc.start()
+      
+    ssc.awaitTermination()
+    
+    //ssc.stop()
+      
+  }
+    
+}
+
+//StreamingLinearRegressionExample.main(Array(""))
+	 
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
