@@ -1,0 +1,79 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_PRINCIPAL_COMPONENT_ANALYSIS_ON_ROW_MATRIX_V1
+Purpose 	:   A Program for Principal Component Analysis on Row Matrix in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   08/02/2019 14:59 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				08/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Principal Component Analysis on Row Matrix in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+import org.apache.spark.mllib.linalg.Matrix
+import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.linalg.distributed.RowMatrix
+
+object PCAOnRowMatrixExample {
+
+  def main(args: Array[String]): Unit = {
+
+    val vAR_CSLAB_conf = new SparkConf().setAppName("PCAOnRowMatrixExample")
+
+    val vAR_CSLAB_data = Array(
+      Vectors.sparse(5, Seq((1, 1.0), (3, 7.0))),
+      Vectors.dense(2.0, 0.0, 3.0, 4.0, 5.0),
+      Vectors.dense(4.0, 0.0, 0.0, 6.0, 7.0))
+
+    val vAR_CSLAB_rows = sc.parallelize(vAR_CSLAB_data)
+
+    val vAR_CSLAB_mat: RowMatrix = new RowMatrix(vAR_CSLAB_rows)
+
+    // Compute the top 4 principal components.
+    // Principal components are stored in a local dense matrix.
+    val vAR_CSLAB_pc: Matrix = vAR_CSLAB_mat.computePrincipalComponents(4)
+
+    // Project the rows to the linear space spanned by the top 4 principal components.
+    val vAR_CSLAB_projected: RowMatrix = vAR_CSLAB_mat.multiply(vAR_CSLAB_pc)
+      
+    val vAR_CSLAB_collect = vAR_CSLAB_projected.rows.collect()
+      
+    println("Projected Row Matrix of principal component:")
+      
+    vAR_CSLAB_collect.foreach { vAR_CSLAB_vector => println(vAR_CSLAB_vector) }
+      
+  }
+    
+}
+
+PCAOnRowMatrixExample.main(Array(" "))
+	 
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  

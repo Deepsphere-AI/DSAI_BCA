@@ -1,0 +1,80 @@
+
+/*******************************************************************************************
+
+File Name       :   CSLAB_RANDOM_RDD_GENERATION_V1
+Purpose 	:   A Program for Random RDD Generation in Scala
+Author		:   Durga Prasad
+Reviewer 	:   Jothi Periasamy
+Date and Time	:   08/02/2019 17:27 hrs
+Version		:   1.0	
+Change History 	: 
+
+____________________________________________________________________________________________
+
+	Who				   When 			  Why
+____________________________________________________________________________________________
+
+
+	DP				08/02/2019		    Initital Release 
+
+____________________________________________________________________________________________
+
+
+/*******************************************************************************************
+
+## Program Description : A Program for Random RDD Generation in Scala
+
+## Scala Development Environment & Runtime - Eclipse IDE, Anaconda, Jupyter
+
+import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.mllib.random.RandomRDDs
+import org.apache.spark.rdd.RDD
+
+object RandomRDDGeneration {
+
+  def main(args: Array[String]) {
+
+    val vAR_CSLAB_conf = new SparkConf().setAppName(s"RandomRDDGeneration")
+
+    val vAR_CSLAB_numExamples = 10000 // number of examples to generate
+      
+    val vAR_CSLAB_fraction = 0.1 // fraction of data to sample
+
+    // Example: RandomRDDs.normalRDD
+    val vAR_CSLAB_normalRDD: RDD[Double] = RandomRDDs.normalRDD(sc, vAR_CSLAB_numExamples)
+      
+    println(s"Generated RDD of ${vAR_CSLAB_normalRDD.count()}" +
+      " examples sampled from the standard normal distribution")
+      
+    println("  First 5 samples:")
+      
+    vAR_CSLAB_normalRDD.take(5).foreach( vAR_CSLAB_x => println(s"    $vAR_CSLAB_x") )
+
+    // Example: RandomRDDs.normalVectorRDD
+    val vAR_CSLAB_normalVectorRDD = RandomRDDs.normalVectorRDD(sc, numRows = vAR_CSLAB_numExamples, numCols = 2)
+      
+    println(s"Generated RDD of ${vAR_CSLAB_normalVectorRDD.count()} examples of length-2 vectors.")
+      
+    println("  First 5 samples:")
+      
+    vAR_CSLAB_normalVectorRDD.take(5).foreach( vAR_CSLAB_x => println(s"    $vAR_CSLAB_x") )
+
+    println()
+      
+  }
+
+}
+
+RandomRDDGeneration.main(Array(" "))
+	 
+/*******************************************************************************************
+  Disclaimer.
+
+      We are providing this code block strictly for learning and researching, this is not a 
+production ready code. We have no liability on this particular code under any circumstances; 
+users should use this code on their own risk. All software, hardware and othr products that 
+are referenced in these materials belong to the respective vendor who developed or who owns 
+this product.
+
+/*******************************************************************************************
+  
